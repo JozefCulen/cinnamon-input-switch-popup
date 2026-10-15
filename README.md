@@ -28,10 +28,28 @@ cursor** whenever you switch keyboard layout, the way macOS and Windows do.
 
 ### From Cinnamon Spices
 
+The extension has been submitted to Cinnamon Spices and is waiting for review
+([linuxmint/cinnamon-spices-extensions#1178](https://github.com/linuxmint/cinnamon-spices-extensions/pull/1178)).
+Until it is published, install it manually as described below.
+
 Once published: *System Settings → Extensions → Download*, search for
 **Input Switch Popup**, install it, then enable it on the *Manage* tab.
 
-### From this repository
+### Manually, without git
+
+1. Download the [ZIP of this repository](https://github.com/JozefCulen/cinnamon-input-switch-popup/archive/refs/heads/main.zip)
+   and extract it.
+2. Copy the extension into your Cinnamon extensions folder:
+
+   ```bash
+   mkdir -p ~/.local/share/cinnamon/extensions
+   cp -r cinnamon-input-switch-popup-main/input-switch-popup@JozefCulen/files/input-switch-popup@JozefCulen ~/.local/share/cinnamon/extensions/
+   ```
+
+3. Open *System Settings → Extensions*, select **Input Switch Popup** and
+   click **+** to enable it.
+
+### From this repository with git
 
 ```bash
 git clone https://github.com/JozefCulen/cinnamon-input-switch-popup.git
