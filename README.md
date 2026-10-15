@@ -3,7 +3,9 @@
 A Cinnamon extension for Linux Mint that shows a small popup **at your text
 cursor** whenever you switch keyboard layout, the way macOS and Windows do.
 
-![Input Switch Popup in a text editor](input-switch-popup@JozefCulen/screenshot.png)
+| Dark theme | Light theme |
+|---|---|
+| ![Input Switch Popup in a text editor with a dark theme](input-switch-popup@JozefCulen/screenshot.png) | ![Input Switch Popup in a text editor with a light theme](docs/screenshot-light.png) |
 
 ## Features
 
@@ -85,20 +87,25 @@ depends on the app:
 | Apps | Cursor position |
 |---|---|
 | GTK apps such as xed (tested), Text Editor, Nemo | Works out of the box |
-| Firefox, LibreOffice, Qt apps | Not tested yet |
-| Chrome, Chromium and Electron apps (VS Code, Slack, Discord…) | Only with accessibility enabled, see below |
+| LibreOffice (Writer tested) | Works out of the box |
+| Firefox, Chrome, Chromium and Electron apps (VS Code, Slack, Discord…) | Only with accessibility enabled, see below |
+| Qt apps | Not tested yet |
 | Places without a text field (desktop, file lists) | Mouse pointer |
 
-To get the cursor position in Chromium-based apps, either start them with
-`--force-renderer-accessibility`, or turn on accessibility for the whole
-desktop and restart those apps:
+Firefox and Chromium-based apps only expose the cursor when accessibility is
+on. Either turn it on for the whole desktop and restart those apps:
 
 ```bash
 gsettings set org.gnome.desktop.interface toolkit-accessibility true
 ```
 
-So far only the `--force-renderer-accessibility` flag has been tested.
-Either way, Chromium-based apps use somewhat more CPU and memory.
+or turn it on per app: start Chromium-based apps with
+`--force-renderer-accessibility`, and Firefox with the environment variable
+`GNOME_ACCESSIBILITY=1`.
+
+So far the `--force-renderer-accessibility` flag and `GNOME_ACCESSIBILITY=1`
+have been tested, the `gsettings` switch has not. Apps with accessibility on
+use somewhat more CPU and memory.
 
 ## How it works
 

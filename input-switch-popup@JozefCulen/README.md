@@ -16,17 +16,19 @@ like macOS and Windows do.
 - **Show all layouts:** turn off to show only the new layout
 - **Duration** and **font size**
 
-## Cursor position in Chrome and Electron apps
+## Cursor position in Firefox, Chrome and Electron apps
 
-GTK apps such as xed report the text cursor
-out of the box. Chrome, Chromium and Electron apps (VS Code, Slack…) only do
-so with accessibility enabled; otherwise the popup appears at the mouse
-pointer. To enable it, start them with `--force-renderer-accessibility`, or
-run this and restart those apps:
+GTK apps such as xed and LibreOffice report the text cursor out of the box.
+Firefox, Chrome, Chromium and Electron apps (VS Code, Slack…) only do so with
+accessibility enabled; otherwise the popup appears at the mouse pointer. To
+enable it, run this and restart those apps:
 
 ```
 gsettings set org.gnome.desktop.interface toolkit-accessibility true
 ```
+
+Or per app: start Chromium-based apps with `--force-renderer-accessibility`,
+and Firefox with the environment variable `GNOME_ACCESSIBILITY=1`.
 
 ## Requirements
 

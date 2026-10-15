@@ -28,9 +28,11 @@ fi
 if [[ "$(gsettings get org.gnome.desktop.interface toolkit-accessibility)" != "true" ]]; then
     cat <<EOF
 
-Note: showing the popup at the text caret needs accessibility support.
-Without it the popup appears at the mouse pointer. To enable it run:
+Note: GTK apps and LibreOffice report the text caret out of the box.
+Firefox, Chrome and Electron apps (VS Code, Slack...) only do so with
+accessibility enabled; otherwise the popup appears at the mouse pointer.
+To enable it, run:
     gsettings set org.gnome.desktop.interface toolkit-accessibility true
-then log out and back in (already-running apps won't pick it up).
+and restart those apps.
 EOF
 fi
