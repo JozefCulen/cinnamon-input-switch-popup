@@ -6,7 +6,8 @@ like macOS and Windows do.
 - The popup opens just below the text cursor, or next to the mouse pointer
   when the app doesn't report its cursor.
 - All your layouts are listed, and a highlight slides to the new one.
-- The highlight uses your Cinnamon theme's accent color.
+- The popup is light with a light Cinnamon theme and dark with a dark one,
+  and the highlight uses your theme's accent color.
 
 ## Settings
 

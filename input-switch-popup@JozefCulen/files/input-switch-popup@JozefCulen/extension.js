@@ -115,6 +115,11 @@ class CaretHelper {
     }
 }
 
+// Perceived brightness of an 8-bit RGB color, from 0 to 1.
+function luminance(red, green, blue) {
+    return (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
+}
+
 // A row of all input sources with a highlight that slides to the active one.
 // With more sources than fit, the row scrolls to keep the active one in view.
 class SourceStrip {
@@ -127,11 +132,14 @@ class SourceStrip {
             opacity: 0,
         });
         this._viewport = new St.Widget({ clip_to_allocation: true });
-        // Invisible actor styled as a theme slider, used to read the accent.
+        // Invisible actors styled as a theme slider and a theme menu, used to
+        // read the accent and whether the theme is light.
         this._accentProbe = new St.Widget({ style_class: "slider", width: 0, height: 0, opacity: 0 });
+        this._menuProbe = new St.Widget({ style_class: "menu", width: 0, height: 0, opacity: 0 });
         this._highlight = new St.Widget({ style_class: "isp-highlight" });
         this._row = new St.BoxLayout({ vertical: false });
         this._viewport.add_child(this._accentProbe);
+        this._viewport.add_child(this._menuProbe);
         this._viewport.add_child(this._highlight);
         this._viewport.add_child(this._row);
         this.actor.add_child(this._viewport);
@@ -148,6 +156,16 @@ class SourceStrip {
         this._labelsKey = null; // re-measure on next show
     }
 
+    // Uses a light popup when the Cinnamon theme's menus are light, so the
+    // popup follows theme changes. Themes without a menu color stay dark.
+    updateScheme() {
+        let { red, green, blue, alpha } = this._menuProbe.get_theme_node().get_background_color();
+        if (alpha > 0 && luminance(red, green, blue) > 0.5)
+            this.actor.add_style_class_name("isp-light");
+        else
+            this.actor.remove_style_class_name("isp-light");
+    }
+
     // Uses the Cinnamon theme's accent (its slider fill color) so the
     // highlight follows theme changes. Themes without one keep the CSS color.
     updateAccent() {
@@ -161,8 +179,7 @@ class SourceStrip {
         let { red, green, blue } = color;
         this._highlight.set_style(`background-color: rgb(${red}, ${green}, ${blue});`);
         // Light accents need dark text on the highlight.
-        let luminance = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
-        if (luminance > 0.7)
+        if (luminance(red, green, blue) > 0.7)
             this.actor.add_style_class_name("isp-light-accent");
         else
             this.actor.remove_style_class_name("isp-light-accent");
@@ -338,6 +355,7 @@ class InputSwitchPopup {
         let wasShowing = this._popup.visible;
         this._popup.remove_all_transitions();
         this._popup.show(); // still transparent; needed before measuring
+        this._strip.updateScheme();
         this._strip.updateAccent();
         this._strip.setLabels(labels);
         this._strip.select(index, fromIndex, wasShowing);

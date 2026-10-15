@@ -13,8 +13,10 @@ cursor** whenever you switch keyboard layout, the way macOS and Windows do.
 - **Lists all your layouts.** A highlight slides from the old layout to the
   new one. With more than five layouts, the row scrolls to keep the active one
   in view.
-- **Matches your theme.** The highlight uses the accent color of your Cinnamon
-  theme (Mint-Y, Mint-L and their color variants) and follows theme changes.
+- **Matches your theme.** With a light Cinnamon theme the popup is light,
+  with a dark theme it is dark. The highlight uses your theme's accent color
+  (Mint-Y, Mint-L and their color variants). Theme changes apply the next time
+  the popup appears.
 - **Stays out of the way.** It fades out after a moment, never takes focus
   and ignores clicks.
 
@@ -110,7 +112,8 @@ Either way, Chromium-based apps use somewhat more CPU and memory.
 - The cursor is only used if it belongs to the focused window, so a stale
   position from another app is never used.
 - The accent color is read from the theme's slider fill color
-  (`-slider-active-background-color`).
+  (`-slider-active-background-color`). Light or dark is decided by the
+  brightness of the theme's menu background (`.menu`).
 
 ## Development
 

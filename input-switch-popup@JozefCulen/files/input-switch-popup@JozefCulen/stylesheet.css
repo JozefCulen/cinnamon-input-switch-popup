@@ -27,3 +27,22 @@
 .isp-light-accent .isp-item-active .isp-item-label {
     color: #1e1e1e;
 }
+
+/* Light Cinnamon themes. Rules for the active label come after these. */
+.isp-popup.isp-light {
+    background-color: rgba(246, 246, 248, 0.97);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.isp-light .isp-item-label {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.isp-light .isp-item-active .isp-item-label {
+    color: #ffffff;
+}
+
+.isp-light.isp-light-accent .isp-item-active .isp-item-label {
+    color: #1e1e1e;
+}
